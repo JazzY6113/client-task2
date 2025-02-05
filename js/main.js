@@ -136,7 +136,11 @@ let app = new Vue({
             }
         },
         removeEditCardItem(index) {
-            this.editingCard.items.splice(index, 1);
+            if (this.editingCard.items.length > 3) {
+                this.editingCard.items.splice(index, 1);
+            } else {
+                alert('Нельзя удалить пункт, так как должно быть не менее трех пунктов.');
+            }
         },
         saveData() {
             localStorage.setItem('cards', JSON.stringify(this.cards));
