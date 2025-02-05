@@ -21,7 +21,7 @@ Vue.component('note-card', {
                 </li>
             </ul>
             <p v-if="card.completedDate">Завершено: {{ card.completedDate }}</p>
-            <button @click="editCard">Редактировать</button>
+            <button v-if="column !== 3" @click="editCard">Редактировать</button>
         </div>
     `,
     methods: {
