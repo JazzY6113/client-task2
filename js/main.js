@@ -96,7 +96,6 @@ let app = new Vue({
             const completedItems = card.items.filter(item => item.completed).length;
             const totalItems = card.items.length;
             const completionPercentage = (completedItems / totalItems) * 100;
-
             if (column === 1 && completionPercentage > 50) {
                 if (this.secondColumnCards.length >= 5) {
                     this.isFirstColumnBlocked = true;
@@ -107,7 +106,6 @@ let app = new Vue({
                 card.column = 3;
                 card.completedDate = new Date().toLocaleString();
             }
-
             this.checkSecondColumn();
             this.saveData();
         },
