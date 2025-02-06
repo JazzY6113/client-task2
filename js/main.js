@@ -21,6 +21,14 @@ Vue.component('note-card', {
                 </li>
             </ul>
             <p v-if="card.completedDate">Завершено: {{ card.completedDate }}</p>
+            <div v-if="card.editHistory.length > 0">
+                <p>История редактирования:</p>
+                <ul>
+                    <li v-for="(date, index) in card.editHistory" :key="index">
+                        {{ date }}
+                    </li>
+                </ul>
+            </div>
             <button v-if="column !== 3" @click="editCard">Редактировать</button>
         </div>
     `,
@@ -72,7 +80,8 @@ let app = new Vue({
                 title: title,
                 items: items.map(text => ({ text: text, completed: false })),
                 column: 1,
-                completedDate: null
+                completedDate: null,
+                editHistory: []
             };
             this.cards.push(newCard);
             this.saveData();
@@ -131,6 +140,7 @@ let app = new Vue({
         saveEditedCard() {
             const index = this.cards.findIndex(c => c.id === this.editingCard.id);
             if (index !== -1) {
+                this.editingCard.editHistory.push(new Date().toLocaleString());
                 this.cards.splice(index, 1, this.editingCard);
             }
             this.editingCard = null;
