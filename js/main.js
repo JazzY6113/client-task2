@@ -42,7 +42,7 @@ let app = new Vue({
         isFirstColumnBlocked: false,
         newCardTitle: '',
         newCardItems: ['', '', ''],
-        editingCard: null
+        editingCard: null,
     },
     computed: {
         firstColumnCards() {
@@ -96,7 +96,7 @@ let app = new Vue({
             const completedItems = card.items.filter(item => item.completed).length;
             const totalItems = card.items.length;
             const completionPercentage = (completedItems / totalItems) * 100;
-        
+    
             if (column === 1) {
                 if (completionPercentage > 50) {
                     if (this.secondColumnCards.length < 5) {
@@ -105,7 +105,11 @@ let app = new Vue({
                 }
             } else if (column === 2) {
                 if (completionPercentage <= 50) {
-                    card.column = 1;
+                    if (this.firstColumnCards.length < 3) {
+                        card.column = 1;
+                    } else {
+                        alert('Первый столбец полон, невозможно переместить карточку обратно.');
+                    }
                 } else if (completionPercentage === 100) {
                     card.column = 3;
                     card.completedDate = new Date().toLocaleString();
