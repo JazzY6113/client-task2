@@ -10,8 +10,9 @@
 </head>
 <body>
     <div id="app">
+        <button @click="deleteAllCards">Удалить все карточки</button>
         <div class="new-card-form">
-            <h2>Создать новую карточку</h2>
+            <h2>Создать новую карточку</h2><br>
             <input v-model="newCardTitle" placeholder="Заголовок карточки" :disabled="isFirstColumnBlocked" />
             <div v-for="(item, index) in newCardItems" :key="index" class="new-card-item">
                 <input v-model="newCardItems[index]" placeholder="Пункт списка" :disabled="isFirstColumnBlocked" />
@@ -23,7 +24,7 @@
         
         <div v-if="editingCard" class="modal">
             <div class="modal-content">
-                <h2>Редактирование карточки</h2>
+                <h2>Редактирование карточки</h2><br>
                 <input v-model="editingCard.title" placeholder="Заголовок" />
                 <div v-for="(item, index) in editingCard.items" :key="index" class="edit-card-item">
                     <input v-model="item.text" placeholder="Пункт списка" />
